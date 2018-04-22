@@ -54,6 +54,9 @@
             this.btnDeleteImage = new System.Windows.Forms.Button();
             this.lbImage = new System.Windows.Forms.Label();
             this.splitter3 = new System.Windows.Forms.Splitter();
+            this.btnRemoveDuplicatesInDirectory = new System.Windows.Forms.Button();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ignoreCurrentDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlDirectories.SuspendLayout();
             this.pnlClusters.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -193,7 +196,9 @@
             // 
             this.executeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.findMatchingDirectoriesToolStripMenuItem,
-            this.findMatchingFilesToolStripMenuItem});
+            this.findMatchingFilesToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.ignoreCurrentDirectoryToolStripMenuItem});
             this.executeToolStripMenuItem.Name = "executeToolStripMenuItem";
             this.executeToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.executeToolStripMenuItem.Text = "&Execute";
@@ -283,6 +288,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.btnRemoveDuplicatesInDirectory);
             this.panel3.Controls.Add(this.lbImage);
             this.panel3.Controls.Add(this.btnDeleteImage);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
@@ -318,6 +324,29 @@
             this.splitter3.Size = new System.Drawing.Size(3, 502);
             this.splitter3.TabIndex = 12;
             this.splitter3.TabStop = false;
+            // 
+            // btnRemoveDuplicatesInDirectory
+            // 
+            this.btnRemoveDuplicatesInDirectory.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnRemoveDuplicatesInDirectory.Location = new System.Drawing.Point(374, 0);
+            this.btnRemoveDuplicatesInDirectory.Name = "btnRemoveDuplicatesInDirectory";
+            this.btnRemoveDuplicatesInDirectory.Size = new System.Drawing.Size(110, 31);
+            this.btnRemoveDuplicatesInDirectory.TabIndex = 2;
+            this.btnRemoveDuplicatesInDirectory.Text = "Remove Duplicates";
+            this.btnRemoveDuplicatesInDirectory.UseVisualStyleBackColor = true;
+            this.btnRemoveDuplicatesInDirectory.Click += new System.EventHandler(this.btnRemoveDuplicatesInDirectory_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(207, 6);
+            // 
+            // ignoreCurrentDirectoryToolStripMenuItem
+            // 
+            this.ignoreCurrentDirectoryToolStripMenuItem.Name = "ignoreCurrentDirectoryToolStripMenuItem";
+            this.ignoreCurrentDirectoryToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.ignoreCurrentDirectoryToolStripMenuItem.Text = "Ignore Current Directory";
+            this.ignoreCurrentDirectoryToolStripMenuItem.Click += new System.EventHandler(this.ignoreCurrentDirectoryToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -380,6 +409,9 @@
         private System.Windows.Forms.Button btnDeleteImage;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Splitter splitter3;
+        private System.Windows.Forms.Button btnRemoveDuplicatesInDirectory;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem ignoreCurrentDirectoryToolStripMenuItem;
     }
 }
 

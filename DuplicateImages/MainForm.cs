@@ -17,6 +17,7 @@ namespace DuplicateImages
         Dictionary<string, List<string>> bunches = null;
         Shell _shell;
         Folder _recyclingBin;
+        List<string> _directoriesToIgnore = new List<string>();
 
         public MainForm()
         {
@@ -124,6 +125,9 @@ namespace DuplicateImages
         {
             bunches = new Dictionary<string, List<string>>();
             WalkFiles(GetDirectories(), filename => {
+                var dir = Path.GetDirectoryName(filename);
+                if (_directoriesToIgnore.Exists(f => f.Equals(dir)))
+                    return;
                 var fi = new FileInfo(filename);
                 var hash = $"{fi.Length} bytes, {Path.GetFileName(filename)}";
                 if (bunches.ContainsKey(hash))
@@ -145,6 +149,27 @@ namespace DuplicateImages
             _recyclingBin.MoveHere(path);
             RemoveFromCluster(lbClusters.SelectedItem as string, path);
             LoadCluster();
+        }
+
+        private void btnRemoveDuplicatesInDirectory_Click(object sender, EventArgs e)
+        {
+            var path = lbImage.Text;  // must happen before unload
+            UnloadImage();
+            var dir = Path.GetDirectoryName(path);
+            foreach (var lst in bunches.Values)
+                foreach (var image_path in lst)
+                    if (dir.Equals(Path.GetDirectoryName(image_path)))
+                        _recyclingBin.MoveHere(image_path);
+            findMatchingFilesToolStripMenuItem_Click(null, null);
+        }
+
+        private void ignoreCurrentDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (lbImage.Text == null || lbImage.Text.Length < 1)
+                return;
+            var path = Path.GetDirectoryName(lbImage.Text);
+            _directoriesToIgnore.Add(path);
+            findMatchingFilesToolStripMenuItem_Click(null, null);
         }
 
         List<string> GetDirectories()
