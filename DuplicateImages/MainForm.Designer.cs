@@ -32,31 +32,42 @@
             this.lbDirectories = new System.Windows.Forms.ListBox();
             this.pnlDirectories = new System.Windows.Forms.Panel();
             this.pnlClusters = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.lbClusters = new System.Windows.Forms.ListBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeSingletonsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.executeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findMatchingDirectoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findMatchingFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ignoreCurrentDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cullToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.keepShortestPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.keepLongestPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.keepFirstPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMembers = new System.Windows.Forms.Panel();
             this.lbMembers = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.executeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.findMatchingDirectoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.removeSingletonsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.findMatchingFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.splitter1 = new System.Windows.Forms.Splitter();
             this.splitter2 = new System.Windows.Forms.Splitter();
+            this.splitter1 = new System.Windows.Forms.Splitter();
             this.pbImage = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.btnDeleteImage = new System.Windows.Forms.Button();
-            this.lbImage = new System.Windows.Forms.Label();
-            this.splitter3 = new System.Windows.Forms.Splitter();
+            this.btnCullClusters = new System.Windows.Forms.Button();
             this.btnRemoveDuplicatesInDirectory = new System.Windows.Forms.Button();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.ignoreCurrentDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbImage = new System.Windows.Forms.Label();
+            this.btnDeleteImage = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.splitter3 = new System.Windows.Forms.Splitter();
+            this.btnRemoveUnselected = new System.Windows.Forms.Button();
+            this.lbTotalBytes = new System.Windows.Forms.Label();
+            this.cullClusterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectedClusterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allClustersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ignoreDirectoriesContainingbestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlDirectories.SuspendLayout();
             this.pnlClusters.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -105,12 +116,23 @@
             // pnlClusters
             // 
             this.pnlClusters.Controls.Add(this.lbClusters);
+            this.pnlClusters.Controls.Add(this.lbTotalBytes);
             this.pnlClusters.Controls.Add(this.label2);
             this.pnlClusters.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlClusters.Location = new System.Drawing.Point(0, 125);
             this.pnlClusters.Name = "pnlClusters";
             this.pnlClusters.Size = new System.Drawing.Size(325, 377);
             this.pnlClusters.TabIndex = 4;
+            // 
+            // lbClusters
+            // 
+            this.lbClusters.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbClusters.FormattingEnabled = true;
+            this.lbClusters.Location = new System.Drawing.Point(0, 26);
+            this.lbClusters.Name = "lbClusters";
+            this.lbClusters.Size = new System.Drawing.Size(325, 351);
+            this.lbClusters.TabIndex = 2;
+            this.lbClusters.SelectedValueChanged += new System.EventHandler(this.lbClusters_SelectedValueChanged);
             // 
             // label2
             // 
@@ -123,22 +145,14 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Clusters";
             // 
-            // lbClusters
-            // 
-            this.lbClusters.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbClusters.FormattingEnabled = true;
-            this.lbClusters.Location = new System.Drawing.Point(0, 13);
-            this.lbClusters.Name = "lbClusters";
-            this.lbClusters.Size = new System.Drawing.Size(325, 364);
-            this.lbClusters.TabIndex = 2;
-            this.lbClusters.SelectedValueChanged += new System.EventHandler(this.lbClusters_SelectedValueChanged);
-            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.optionsToolStripMenuItem,
-            this.executeToolStripMenuItem});
+            this.executeToolStripMenuItem,
+            this.cullToolStripMenuItem,
+            this.cullClusterToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1217, 24);
@@ -154,10 +168,89 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.removeSingletonsToolStripMenuItem});
+            this.removeSingletonsToolStripMenuItem,
+            this.ignoreDirectoriesContainingbestToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "&Options";
+            // 
+            // removeSingletonsToolStripMenuItem
+            // 
+            this.removeSingletonsToolStripMenuItem.Checked = true;
+            this.removeSingletonsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.removeSingletonsToolStripMenuItem.Name = "removeSingletonsToolStripMenuItem";
+            this.removeSingletonsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.removeSingletonsToolStripMenuItem.Text = "Remove Singletons";
+            // 
+            // executeToolStripMenuItem
+            // 
+            this.executeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.findMatchingDirectoriesToolStripMenuItem,
+            this.findMatchingFilesToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.ignoreCurrentDirectoryToolStripMenuItem});
+            this.executeToolStripMenuItem.Name = "executeToolStripMenuItem";
+            this.executeToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.executeToolStripMenuItem.Text = "&Execute";
+            // 
+            // findMatchingDirectoriesToolStripMenuItem
+            // 
+            this.findMatchingDirectoriesToolStripMenuItem.Name = "findMatchingDirectoriesToolStripMenuItem";
+            this.findMatchingDirectoriesToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.findMatchingDirectoriesToolStripMenuItem.Text = "Find Matching &Directories";
+            this.findMatchingDirectoriesToolStripMenuItem.Click += new System.EventHandler(this.findMatchingDirectoriesToolStripMenuItem_Click);
+            // 
+            // findMatchingFilesToolStripMenuItem
+            // 
+            this.findMatchingFilesToolStripMenuItem.Name = "findMatchingFilesToolStripMenuItem";
+            this.findMatchingFilesToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.findMatchingFilesToolStripMenuItem.Text = "Find Matching Files";
+            this.findMatchingFilesToolStripMenuItem.Click += new System.EventHandler(this.findMatchingFilesToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(207, 6);
+            // 
+            // ignoreCurrentDirectoryToolStripMenuItem
+            // 
+            this.ignoreCurrentDirectoryToolStripMenuItem.Name = "ignoreCurrentDirectoryToolStripMenuItem";
+            this.ignoreCurrentDirectoryToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.ignoreCurrentDirectoryToolStripMenuItem.Text = "Ignore Current Directory";
+            this.ignoreCurrentDirectoryToolStripMenuItem.Click += new System.EventHandler(this.ignoreCurrentDirectoryToolStripMenuItem_Click);
+            // 
+            // cullToolStripMenuItem
+            // 
+            this.cullToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.keepShortestPathToolStripMenuItem,
+            this.keepLongestPathToolStripMenuItem,
+            this.keepFirstPathToolStripMenuItem});
+            this.cullToolStripMenuItem.Name = "cullToolStripMenuItem";
+            this.cullToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.cullToolStripMenuItem.Text = "&Cull";
+            // 
+            // keepShortestPathToolStripMenuItem
+            // 
+            this.keepShortestPathToolStripMenuItem.Checked = true;
+            this.keepShortestPathToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.keepShortestPathToolStripMenuItem.Name = "keepShortestPathToolStripMenuItem";
+            this.keepShortestPathToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.keepShortestPathToolStripMenuItem.Text = "Keep &Shortest Path";
+            this.keepShortestPathToolStripMenuItem.Click += new System.EventHandler(this.keepShortestPathToolStripMenuItem_Click);
+            // 
+            // keepLongestPathToolStripMenuItem
+            // 
+            this.keepLongestPathToolStripMenuItem.Name = "keepLongestPathToolStripMenuItem";
+            this.keepLongestPathToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.keepLongestPathToolStripMenuItem.Text = "Keep Longest Path";
+            this.keepLongestPathToolStripMenuItem.Click += new System.EventHandler(this.keepLongestPathToolStripMenuItem_Click);
+            // 
+            // keepFirstPathToolStripMenuItem
+            // 
+            this.keepFirstPathToolStripMenuItem.Name = "keepFirstPathToolStripMenuItem";
+            this.keepFirstPathToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.keepFirstPathToolStripMenuItem.Text = "Keep First Path";
+            this.keepFirstPathToolStripMenuItem.Click += new System.EventHandler(this.keepFirstPathToolStripMenuItem_Click);
             // 
             // pnlMembers
             // 
@@ -192,39 +285,6 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Cluster Members";
             // 
-            // executeToolStripMenuItem
-            // 
-            this.executeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.findMatchingDirectoriesToolStripMenuItem,
-            this.findMatchingFilesToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.ignoreCurrentDirectoryToolStripMenuItem});
-            this.executeToolStripMenuItem.Name = "executeToolStripMenuItem";
-            this.executeToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
-            this.executeToolStripMenuItem.Text = "&Execute";
-            // 
-            // findMatchingDirectoriesToolStripMenuItem
-            // 
-            this.findMatchingDirectoriesToolStripMenuItem.Name = "findMatchingDirectoriesToolStripMenuItem";
-            this.findMatchingDirectoriesToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.findMatchingDirectoriesToolStripMenuItem.Text = "Find Matching &Directories";
-            this.findMatchingDirectoriesToolStripMenuItem.Click += new System.EventHandler(this.findMatchingDirectoriesToolStripMenuItem_Click);
-            // 
-            // removeSingletonsToolStripMenuItem
-            // 
-            this.removeSingletonsToolStripMenuItem.Checked = true;
-            this.removeSingletonsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.removeSingletonsToolStripMenuItem.Name = "removeSingletonsToolStripMenuItem";
-            this.removeSingletonsToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.removeSingletonsToolStripMenuItem.Text = "Remove Singletons";
-            // 
-            // findMatchingFilesToolStripMenuItem
-            // 
-            this.findMatchingFilesToolStripMenuItem.Name = "findMatchingFilesToolStripMenuItem";
-            this.findMatchingFilesToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.findMatchingFilesToolStripMenuItem.Text = "Find Matching Files";
-            this.findMatchingFilesToolStripMenuItem.Click += new System.EventHandler(this.findMatchingFilesToolStripMenuItem_Click);
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.pnlClusters);
@@ -236,14 +296,6 @@
             this.panel1.Size = new System.Drawing.Size(325, 502);
             this.panel1.TabIndex = 8;
             // 
-            // splitter1
-            // 
-            this.splitter1.Location = new System.Drawing.Point(325, 24);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 502);
-            this.splitter1.TabIndex = 9;
-            this.splitter1.TabStop = false;
-            // 
             // splitter2
             // 
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Top;
@@ -252,6 +304,14 @@
             this.splitter2.Size = new System.Drawing.Size(325, 3);
             this.splitter2.TabIndex = 5;
             this.splitter2.TabStop = false;
+            // 
+            // splitter1
+            // 
+            this.splitter1.Location = new System.Drawing.Point(325, 24);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 502);
+            this.splitter1.TabIndex = 9;
+            this.splitter1.TabStop = false;
             // 
             // pbImage
             // 
@@ -275,19 +335,10 @@
             this.panel2.Size = new System.Drawing.Size(559, 502);
             this.panel2.TabIndex = 11;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.label4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label4.Location = new System.Drawing.Point(0, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(81, 13);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Selected Image";
-            // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.btnRemoveUnselected);
+            this.panel3.Controls.Add(this.btnCullClusters);
             this.panel3.Controls.Add(this.btnRemoveDuplicatesInDirectory);
             this.panel3.Controls.Add(this.lbImage);
             this.panel3.Controls.Add(this.btnDeleteImage);
@@ -297,33 +348,16 @@
             this.panel3.Size = new System.Drawing.Size(559, 31);
             this.panel3.TabIndex = 11;
             // 
-            // btnDeleteImage
+            // btnCullClusters
             // 
-            this.btnDeleteImage.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnDeleteImage.Location = new System.Drawing.Point(484, 0);
-            this.btnDeleteImage.Name = "btnDeleteImage";
-            this.btnDeleteImage.Size = new System.Drawing.Size(75, 31);
-            this.btnDeleteImage.TabIndex = 0;
-            this.btnDeleteImage.Text = "Delete";
-            this.btnDeleteImage.UseVisualStyleBackColor = true;
-            this.btnDeleteImage.Click += new System.EventHandler(this.btnDeleteImage_Click);
-            // 
-            // lbImage
-            // 
-            this.lbImage.AutoSize = true;
-            this.lbImage.Location = new System.Drawing.Point(6, 9);
-            this.lbImage.Name = "lbImage";
-            this.lbImage.Size = new System.Drawing.Size(90, 13);
-            this.lbImage.TabIndex = 1;
-            this.lbImage.Text = "<selected image>";
-            // 
-            // splitter3
-            // 
-            this.splitter3.Location = new System.Drawing.Point(655, 24);
-            this.splitter3.Name = "splitter3";
-            this.splitter3.Size = new System.Drawing.Size(3, 502);
-            this.splitter3.TabIndex = 12;
-            this.splitter3.TabStop = false;
+            this.btnCullClusters.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnCullClusters.Location = new System.Drawing.Point(261, 0);
+            this.btnCullClusters.Name = "btnCullClusters";
+            this.btnCullClusters.Size = new System.Drawing.Size(113, 31);
+            this.btnCullClusters.TabIndex = 3;
+            this.btnCullClusters.Text = "Cull Clusters";
+            this.btnCullClusters.UseVisualStyleBackColor = true;
+            this.btnCullClusters.Click += new System.EventHandler(this.btnCullClusters_Click);
             // 
             // btnRemoveDuplicatesInDirectory
             // 
@@ -336,17 +370,99 @@
             this.btnRemoveDuplicatesInDirectory.UseVisualStyleBackColor = true;
             this.btnRemoveDuplicatesInDirectory.Click += new System.EventHandler(this.btnRemoveDuplicatesInDirectory_Click);
             // 
-            // toolStripSeparator1
+            // lbImage
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(207, 6);
+            this.lbImage.AutoSize = true;
+            this.lbImage.Location = new System.Drawing.Point(6, 9);
+            this.lbImage.Name = "lbImage";
+            this.lbImage.Size = new System.Drawing.Size(90, 13);
+            this.lbImage.TabIndex = 1;
+            this.lbImage.Text = "<selected image>";
             // 
-            // ignoreCurrentDirectoryToolStripMenuItem
+            // btnDeleteImage
             // 
-            this.ignoreCurrentDirectoryToolStripMenuItem.Name = "ignoreCurrentDirectoryToolStripMenuItem";
-            this.ignoreCurrentDirectoryToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.ignoreCurrentDirectoryToolStripMenuItem.Text = "Ignore Current Directory";
-            this.ignoreCurrentDirectoryToolStripMenuItem.Click += new System.EventHandler(this.ignoreCurrentDirectoryToolStripMenuItem_Click);
+            this.btnDeleteImage.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnDeleteImage.Location = new System.Drawing.Point(484, 0);
+            this.btnDeleteImage.Name = "btnDeleteImage";
+            this.btnDeleteImage.Size = new System.Drawing.Size(75, 31);
+            this.btnDeleteImage.TabIndex = 0;
+            this.btnDeleteImage.Text = "Delete";
+            this.btnDeleteImage.UseVisualStyleBackColor = true;
+            this.btnDeleteImage.Click += new System.EventHandler(this.btnDeleteImage_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label4.Location = new System.Drawing.Point(0, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(81, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Selected Image";
+            // 
+            // splitter3
+            // 
+            this.splitter3.Location = new System.Drawing.Point(655, 24);
+            this.splitter3.Name = "splitter3";
+            this.splitter3.Size = new System.Drawing.Size(3, 502);
+            this.splitter3.TabIndex = 12;
+            this.splitter3.TabStop = false;
+            // 
+            // btnRemoveUnselected
+            // 
+            this.btnRemoveUnselected.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnRemoveUnselected.Location = new System.Drawing.Point(139, 0);
+            this.btnRemoveUnselected.Name = "btnRemoveUnselected";
+            this.btnRemoveUnselected.Size = new System.Drawing.Size(122, 31);
+            this.btnRemoveUnselected.TabIndex = 4;
+            this.btnRemoveUnselected.Text = "Remove Unselected";
+            this.btnRemoveUnselected.UseVisualStyleBackColor = true;
+            this.btnRemoveUnselected.Click += new System.EventHandler(this.btnRemoveUnselected_Click);
+            // 
+            // lbTotalBytes
+            // 
+            this.lbTotalBytes.AutoSize = true;
+            this.lbTotalBytes.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lbTotalBytes.Location = new System.Drawing.Point(0, 13);
+            this.lbTotalBytes.Name = "lbTotalBytes";
+            this.lbTotalBytes.Size = new System.Drawing.Size(59, 13);
+            this.lbTotalBytes.TabIndex = 3;
+            this.lbTotalBytes.Text = "Total bytes";
+            // 
+            // cullClusterToolStripMenuItem
+            // 
+            this.cullClusterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.selectedClusterToolStripMenuItem,
+            this.allClustersToolStripMenuItem});
+            this.cullClusterToolStripMenuItem.Name = "cullClusterToolStripMenuItem";
+            this.cullClusterToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
+            this.cullClusterToolStripMenuItem.Text = "Cull Cluster";
+            // 
+            // selectedClusterToolStripMenuItem
+            // 
+            this.selectedClusterToolStripMenuItem.Checked = true;
+            this.selectedClusterToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.selectedClusterToolStripMenuItem.Name = "selectedClusterToolStripMenuItem";
+            this.selectedClusterToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.selectedClusterToolStripMenuItem.Text = "Selected Cluster";
+            this.selectedClusterToolStripMenuItem.Click += new System.EventHandler(this.selectedClusterToolStripMenuItem_Click);
+            // 
+            // allClustersToolStripMenuItem
+            // 
+            this.allClustersToolStripMenuItem.Name = "allClustersToolStripMenuItem";
+            this.allClustersToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.allClustersToolStripMenuItem.Text = "All Clusters";
+            this.allClustersToolStripMenuItem.Click += new System.EventHandler(this.allClustersToolStripMenuItem_Click);
+            // 
+            // ignoreDirectoriesContainingbestToolStripMenuItem
+            // 
+            this.ignoreDirectoriesContainingbestToolStripMenuItem.Checked = true;
+            this.ignoreDirectoriesContainingbestToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ignoreDirectoriesContainingbestToolStripMenuItem.Name = "ignoreDirectoriesContainingbestToolStripMenuItem";
+            this.ignoreDirectoriesContainingbestToolStripMenuItem.Size = new System.Drawing.Size(257, 22);
+            this.ignoreDirectoriesContainingbestToolStripMenuItem.Text = "Ignore directories containing \'best\'";
+            this.ignoreDirectoriesContainingbestToolStripMenuItem.Click += new System.EventHandler(this.ignoreDirectoriesContainingbestToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -412,6 +528,17 @@
         private System.Windows.Forms.Button btnRemoveDuplicatesInDirectory;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem ignoreCurrentDirectoryToolStripMenuItem;
+        private System.Windows.Forms.Button btnCullClusters;
+        private System.Windows.Forms.ToolStripMenuItem cullToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem keepShortestPathToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem keepLongestPathToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem keepFirstPathToolStripMenuItem;
+        private System.Windows.Forms.Button btnRemoveUnselected;
+        private System.Windows.Forms.Label lbTotalBytes;
+        private System.Windows.Forms.ToolStripMenuItem cullClusterToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem selectedClusterToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem allClustersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ignoreDirectoriesContainingbestToolStripMenuItem;
     }
 }
 
